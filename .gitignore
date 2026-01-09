@@ -1,54 +1,31 @@
-########################
+# =====================
 # Terraform
-########################
-.terraform/
-.terraform.lock.hcl
+# =====================
+**/.terraform/*
 *.tfstate
-*.tfstate.backup
+*.tfstate.*
 *.tfvars
-
-########################
-# Ansible
-########################
-*.retry
-inventory
-ansible.cfg
-
-########################
-# SSH / Keys / Secrets
-########################
+*.lock.hcl
+# =====================
+# SSH / Keys
+# =====================
 *.pem
 *.key
-*.crt
-*.pub
 
-########################
+# =====================
+# Ansible
+# =====================
+ansible/inventory
+ansible/*.conf
+ansible/**/client.conf
+ansible/**/server.conf
+
+# =====================
 # WireGuard
-########################
-*.conf
-wg-keys/
-wireguard/
+# =====================
+wireguard/*.conf
+ansible/**/wireguard/*.conf
 
-########################
-# Kubernetes
-########################
-kubeconfig
-.kube/
-
-########################
-# Python
-########################
-__pycache__/
-*.pyc
-*.pyo
-venv/
-.env
-
-########################
-# OS / Editor
-########################
-.DS_Store
-.idea/
-.vscode/
-*.swp
+# Allow templates
+!**/*.example
 
