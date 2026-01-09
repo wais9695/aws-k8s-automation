@@ -1,0 +1,65 @@
+- hosts: server
+  become: yes
+  roles:
+    - base
+    - wireguard
+
+  vars:
+    kubeconfig_path: /etc/rancher/k3s/k3s.yaml
+
+  tasks:
+    # 1️⃣ نصب pip
+    - name: Ensure Python3 pip is installed
+      apt:
+        name: python3-pip
+        state: present
+
+    # 2️⃣ نصب ماژول Kubernetes با --break-system-packages
+    - name: Install Kubernetes Python module
+      pip:
+        name: kubernetes
+        executable: pip3
+        extra_args: --break-system-packages
+
+    # 3️⃣ نصب Docker
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    # 4️⃣ نصب k3s (Kubernetes lightweight)
+    - name: Install k3s
+      shell: |
+        curl -sfL https://get.k3s.io | sh -
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: Ensure kubeconfig is readable
+      file:
+        path: "{{ kubeconfig_path }}"
+        owner: ubuntu
+        group: ubuntu
+        mode: '0600'
+
+    # 5️⃣ Deploy Kubernetes Deployment
+    - name: Deploy Kubernetes resources
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', '../kube/deployment.yml') | from_yaml }}"
+      environment:
+        KUBECONFIG: "{{ kubeconfig_path }}"
+
+    # 6️⃣ Deploy Kubernetes Service
+    - name: Deploy Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', '../kube/service.yml') | from_yaml }}"
+      environment:
+        KUBECONFIG: "{{ kubeconfig_path }}"
+

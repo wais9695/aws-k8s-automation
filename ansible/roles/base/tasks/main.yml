@@ -1,0 +1,16 @@
+- apt:
+    update_cache: yes
+    upgrade: yes
+
+- apt:
+    name: docker.io
+    state: present
+
+- systemd:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: Install k3s
+  shell: curl -sfL https://get.k3s.io | sh -
+

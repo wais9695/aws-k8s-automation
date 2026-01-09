@@ -1,0 +1,54 @@
+########################
+# Terraform
+########################
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+########################
+# Ansible
+########################
+*.retry
+inventory
+ansible.cfg
+
+########################
+# SSH / Keys / Secrets
+########################
+*.pem
+*.key
+*.crt
+*.pub
+
+########################
+# WireGuard
+########################
+*.conf
+wg-keys/
+wireguard/
+
+########################
+# Kubernetes
+########################
+kubeconfig
+.kube/
+
+########################
+# Python
+########################
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+########################
+# OS / Editor
+########################
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
