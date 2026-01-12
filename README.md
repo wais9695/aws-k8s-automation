@@ -30,7 +30,8 @@ AWS EC2 (Ubuntu)
    ├── Docker
    ├── Kubernetes (k3s)
    └── Flask Application (Pod)
-## 📁 Project Structure
+
+📁 Project Structure
 aws-k8s-automation/
 ├── infra/              # Terraform AWS infrastructure
 │   ├── main.tf
@@ -44,17 +45,12 @@ aws-k8s-automation/
 │   │   ├── wireguard/
 │   │   └── kubernetes/
 │
-├── k8s/                # Kubernetes manifests
-│   ├── namespace.yml
+├── kube/                # Kubernetes manifests
 │   ├── deployment.yml
 │   └── service.yml
 │
-├── app/                # Flask application
-│   ├── app.py
-│   └── Dockerfile
 │
-├── scripts/
-│   └── deploy.sh       # Full automation script
+├── deploy.sh       # Full automation script
 │
 ├── .gitignore
 └── README.md
@@ -83,7 +79,7 @@ SSH key pair for EC2
 Linux-based system (recommended)
 
 🚀 One-command Deployment
-bash scripts/deploy.sh
+bash deploy.sh
 
 After successful deployment, open your browser:
 
