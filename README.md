@@ -30,6 +30,7 @@ AWS EC2 (Ubuntu)
    ├── Docker
    ├── Kubernetes (k3s)
    └── Flask Application (Pod)
+## 📁 Project Structure
 aws-k8s-automation/
 ├── infra/              # Terraform AWS infrastructure
 │   ├── main.tf
@@ -58,25 +59,35 @@ aws-k8s-automation/
 ├── .gitignore
 └── README.md
 
-
 ⚙️ What This Project Does
 
 Provisions an AWS EC2 instance using Terraform
-
-Automatically retrieves the public IP address
-
-Updates the Ansible inventory dynamically
-
+Automatically retrieves the EC2 public IP
+Updates Ansible inventory dynamically
 Configures the server (Docker, Kubernetes, networking)
-
 Sets up WireGuard VPN for secure access
-
-Builds and deploys a Flask application as a Docker container
-
+Builds and containerizes a Flask application
 Deploys the application to Kubernetes
-
 Exposes the application via a Kubernetes Service
-
 Makes the application accessible directly via browser
-➡️ The entire workflow is executed automatically
+➡️ The entire workflow is fully automated
+
+▶️ How to Run
+Prerequisites
+
+AWS account
+AWS credentials configured
+Terraform installed
+Ansible installed
+SSH key pair for EC2
+Linux-based system (recommended)
+
+🚀 One-command Deployment
+bash scripts/deploy.sh
+
+After successful deployment, open your browser:
+
+http://<EC2_PUBLIC_IP>:8080
+
+
 
