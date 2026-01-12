@@ -8,20 +8,21 @@
     kubeconfig_path: /etc/rancher/k3s/k3s.yaml
 
   tasks:
-    # 1️⃣ نصب pip
+    # Instal Pip for Python3
     - name: Ensure Python3 pip is installed
       apt:
         name: python3-pip
         state: present
 
-    # 2️⃣ نصب ماژول Kubernetes با --break-system-packages
+    
+    # Install Kubernetes Python module with --break-system-packages
     - name: Install Kubernetes Python module
       pip:
         name: kubernetes
         executable: pip3
         extra_args: --break-system-packages
 
-    # 3️⃣ نصب Docker
+    # Install Docker
     - name: Ensure Docker is installed
       apt:
         name: docker.io
@@ -33,7 +34,7 @@
         state: started
         enabled: yes
 
-    # 4️⃣ نصب k3s (Kubernetes lightweight)
+    # Install k3s
     - name: Install k3s
       shell: |
         curl -sfL https://get.k3s.io | sh -
@@ -47,7 +48,7 @@
         group: ubuntu
         mode: '0600'
 
-    # 5️⃣ Deploy Kubernetes Deployment
+    # Deploy Kubernetes Deployment
     - name: Deploy Kubernetes resources
       kubernetes.core.k8s:
         state: present
@@ -55,7 +56,7 @@
       environment:
         KUBECONFIG: "{{ kubeconfig_path }}"
 
-    # 6️⃣ Deploy Kubernetes Service
+    # Deploy Kubernetes Service
     - name: Deploy Service
       kubernetes.core.k8s:
         state: present
