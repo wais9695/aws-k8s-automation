@@ -25,6 +25,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: random-number-client-deployment
+  namespace: default
 spec:
   selector:
     matchLabels:
@@ -34,7 +35,8 @@ spec:
       labels:
         app: random-number-client
     spec:
-      - name: random-number-client
-        image: waisahmadi0907/random-client:v1
-        ports:
-          - containerPort: 5000
+      containers:
+        - name: random-number-client
+          image: waisahmadi0907/random-client:v1
+          ports:
+            - containerPort: 5000

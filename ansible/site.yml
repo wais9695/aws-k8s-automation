@@ -51,7 +51,7 @@
     - name: Deploy Kubernetes resources
       kubernetes.core.k8s:
         state: present
-        src: "{{playbook_dir}}/../kube/deployment.yml"
+        definition: "{{lookup('file', '../kube/deployment.yml') | from_yaml_all }}"
       environment:
         KUBECONFIG: "{{ kubeconfig_path }}"
 
@@ -59,7 +59,7 @@
     - name: Deploy Service
       kubernetes.core.k8s:
         state: present
-        src: "{{playbook_dir}}/../kube/service.yml"
+        definition: "{{lookup('file', '../kube/service.yml') | from_yaml_all }}"
       environment:
         KUBECONFIG: "{{ kubeconfig_path }}"
 

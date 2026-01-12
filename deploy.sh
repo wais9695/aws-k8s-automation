@@ -33,4 +33,4 @@ ansible-playbook -i inventory site.yml
 
 echo "✅ Deployment completed successfully!"
 echo "🌐 Open your application at:"
-echo "👉 http://$SERVER_IP:30080/health"
+echo "👉 http://$SERVER_IP:8080"
