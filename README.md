@@ -31,7 +31,7 @@ AWS EC2 (Ubuntu)
    ├── Kubernetes (k3s)
    └── Flask Application (Pod)
 
-📁 Project Structure
+**📁 Project Structure**
 aws-k8s-automation/
 ├── infra/              # Terraform AWS infrastructure
 │   ├── main.tf
